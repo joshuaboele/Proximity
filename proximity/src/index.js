@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
-const List = ({ name, price, rating }) => {
+const RestaurantProfile = ({ name, price, rating }) => {
     return (
         <div>
             <h1>Name: {name}</h1>
@@ -25,7 +25,7 @@ const App = () => {
     console.log(restaurants);
 
     const restaurantList = restaurants.map((restaurant, index) => (
-        <List key={index} name={restaurant.name} price={restaurant.price} rating={restaurant.rating} />
+        <RestaurantProfile key={index} name={restaurant.name} price={restaurant.price} rating={restaurant.rating} />
     ));
 
     return <ul>{restaurantList}</ul>;
