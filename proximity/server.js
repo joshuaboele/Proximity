@@ -28,7 +28,6 @@ const server = http.createServer((req, res) => {
         })
         .then((response) => {
             data = JSON.stringify(response.jsonBody.businesses);
-            console.log(data);
             res.end(data);
         })
         .catch((e) => {
