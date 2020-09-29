@@ -1,12 +1,24 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
+const Name = ({ name }) => {
+    return <span>Name: {name}</span>;
+};
+
+const Price = ({ price }) => {
+    return <span>price: {price}</span>;
+};
+
+const Rating = ({ rating }) => {
+    return <span>rating: {rating}</span>;
+};
+
 const RestaurantProfile = ({ name, price, rating }) => {
     return (
         <div>
-            <h1>Name: {name}</h1>
-            <p>Price range: {price}</p>
-            <span>Rating: {rating}</span>
+            <Name name={name} />
+            <Price price={price} />
+            <Rating rating={rating} />
         </div>
     );
 };
