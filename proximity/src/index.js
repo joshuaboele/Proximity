@@ -2,24 +2,24 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 
 const Name = ({ name }) => {
-    return <span>Name: {name}</span>;
+    return <li>Name: {name}</li>;
 };
 
 const Price = ({ price }) => {
-    return <span>price: {price}</span>;
+    return <li>price: {price}</li>;
 };
 
 const Rating = ({ rating }) => {
-    return <span>rating: {rating}</span>;
+    return <li>rating: {rating}</li>;
 };
 
 const RestaurantProfile = ({ name, price, rating }) => {
     return (
-        <div>
+        <ul>
             <Name name={name} />
             <Price price={price} />
             <Rating rating={rating} />
-        </div>
+        </ul>
     );
 };
 
