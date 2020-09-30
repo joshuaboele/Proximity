@@ -23,6 +23,14 @@ const RestaurantProfile = ({ name, price, rating }) => {
     );
 };
 
+const RestaurantResults = ({ restaurants }) => (
+    <div>
+        {restaurants.map((restaurant, index) => (
+            <RestaurantProfile key={index} {...restaurant} />
+        ))}
+    </div>
+);
+
 const App = () => {
     const [restaurants, setRestaurants] = useState([]);
 
@@ -36,11 +44,11 @@ const App = () => {
 
     console.log(restaurants);
 
-    const restaurantList = restaurants.map((restaurant, index) => (
-        <RestaurantProfile key={index} name={restaurant.name} price={restaurant.price} rating={restaurant.rating} />
-    ));
-
-    return <ul>{restaurantList}</ul>;
+    return (
+        <div>
+            <RestaurantResults restaurants={restaurants} />
+        </div>
+    );
 };
 
 ReactDOM.render(<App />, document.getElementById("root"));
