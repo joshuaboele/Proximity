@@ -1,5 +1,7 @@
 require("dotenv").config();
+require("request");
 
+const url = require("url");
 const http = require("http");
 const yelp = require("yelp-fusion");
 
@@ -8,10 +10,13 @@ const client = yelp.client(process.env.API_KEY);
 const hostname = "127.0.0.1";
 const port = 4000;
 
-console.log("hey");
-
 const server = http.createServer((req, res) => {
+    console.log("--------------REFRESHED-------------");
+    let requestUrl = req.url;
+    let parsedUrl = url.parse(requestUrl, true);
+
     res.statusCode = 200;
+
     res.setHeader("Content-Type", "text/plain");
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Request-Method", "");
@@ -21,11 +26,7 @@ const server = http.createServer((req, res) => {
     let data = "";
 
     client
-        .search({
-            term: "Pizza",
-            location: "Rotterdam",
-            limit: 10,
-        })
+        .search(parsedUrl.query)
         .then((response) => {
             data = JSON.stringify(response.jsonBody.businesses);
             res.end(data);

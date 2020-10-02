@@ -1,43 +1,56 @@
 import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
+import "./index.css";
 
 const Name = ({ name }) => {
-    return <li>Name: {name}</li>;
+    return <h2>Name: {name}</h2>;
+};
+
+const Address = ({ address1 }) => {
+    console.log();
+    return <span>Address: {address1}</span>;
 };
 
 const Price = ({ price }) => {
-    return <li>price: {price}</li>;
+    return <p>Price: {price}</p>;
 };
 
 const Rating = ({ rating }) => {
-    return <li>rating: {rating}</li>;
+    return <p>Rating: {rating}</p>;
 };
 
-const RestaurantProfile = ({ name, price, rating }) => {
+const Image = ({ image }) => {
+    return <img className="image" src={image}></img>;
+};
+
+const RestaurantProfile = ({ name, price, rating, image_url, location }) => {
     return (
-        <ul>
+        <li className="list__item">
+            <Image image={image_url} />
             <Name name={name} />
+            <Address {...location} />
             <Price price={price} />
             <Rating rating={rating} />
-        </ul>
+        </li>
     );
 };
 
 const RestaurantResults = ({ restaurants }) => (
-    <div>
+    <ul className="list">
         {restaurants.map((restaurant, index) => (
             <RestaurantProfile key={index} {...restaurant} />
         ))}
-    </div>
+    </ul>
 );
 
 const App = () => {
     const [restaurants, setRestaurants] = useState([]);
 
     useEffect(() => {
-        fetch("http://localhost:4000/")
+        fetch("http://localhost:4000/?term=pizza&location=rotterdam&limit=10")
             .then((response) => response.json())
             .then((data) => {
+                console.log(data);
                 setRestaurants(data);
             });
     }, []);
@@ -46,7 +59,10 @@ const App = () => {
 
     return (
         <div>
-            <RestaurantResults restaurants={restaurants} />
+            <h1>Proximity</h1>
+            <div className="wrapper">
+                <RestaurantResults restaurants={restaurants} />
+            </div>
         </div>
     );
 };
