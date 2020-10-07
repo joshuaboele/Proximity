@@ -11,8 +11,6 @@ const hostname = "127.0.0.1";
 const port = 4000;
 
 const server = http.createServer((req, res) => {
-    console.log("--------------REFRESHED-------------");
-
     let requestUrl = req.url;
     let parsedUrl = url.parse(requestUrl, true);
 
@@ -31,6 +29,7 @@ const server = http.createServer((req, res) => {
         .then((response) => {
             data = JSON.stringify(response.jsonBody.businesses);
             res.end(data);
+            console.log(data);
         })
         .catch((e) => {
             console.log(e);

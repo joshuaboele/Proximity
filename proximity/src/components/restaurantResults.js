@@ -4,8 +4,8 @@ import RestaurantProfile from "./restaurantProfile";
 
 const RestaurantResults = ({ restaurants }) => (
     <ul className="list">
-        {restaurants.map((restaurant, index) => (
-            <RestaurantProfile key={index} {...restaurant} />
+        {restaurants.map((restaurant) => (
+            <RestaurantProfile key={restaurant.image_url} {...restaurant} />
         ))}
     </ul>
 );
