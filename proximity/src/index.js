@@ -16,19 +16,25 @@ var quizData = [
         option_b: "curry",
     },
     {
-        question: "Soup or Curry?",
+        question: "Vraag 3?",
         option_a: "soup",
         option_b: "curry",
     },
 ];
 
-const Questions = () => {
+const Questions = ({ index, setIndex, answer, setAnswer }) => {
+    const endOfArray = quizData.length;
+    console.log(index);
+    console.log(endOfArray);
+
     const handleAnswer = (option) => {
         setAnswer([...answer, option]);
-        setIndex(index + 1);
+        if (index !== endOfArray) {
+            setIndex(index + 1);
+        } else {
+            console.log("End of quiz");
+        }
     };
-    const [answer, setAnswer] = useState([]);
-    const [index, setIndex] = useState(0);
 
     let question = quizData[index].question;
     let option_A = quizData[index].option_a;
@@ -39,16 +45,18 @@ const Questions = () => {
             <Title title={question} />
             <button onClick={() => handleAnswer(option_A)}>{option_A}</button>
             <button onClick={() => handleAnswer(option_B)}>{option_B}</button>
-            {console.log(answer)}
         </div>
     );
 };
 
 const App = () => {
     const [restaurants, setRestaurants] = useState([]);
+    const [answer, setAnswer] = useState([]);
+    const [index, setIndex] = useState(0);
+    const isFinished = index === quizData.length;
 
     useEffect(() => {
-        fetch("http://localhost:4000/?term=sushi&location=rotterdam&limit=5")
+        fetch("http://localhost:4000/?term=sushi,pizza&location=kyoto&limit=5")
             .then((response) => response.json())
             .then((data) => {
                 setRestaurants(data);
@@ -58,8 +66,10 @@ const App = () => {
     return (
         <div>
             <div className="wrapper">
-                <Questions />
-                <RestaurantResults restaurants={restaurants} />
+                {!isFinished && <Questions index={index} setIndex={setIndex} answer={answer} setAnswer={setAnswer} />}
+                <ul className="list">
+                    <RestaurantResults className="" restaurants={restaurants} />
+                </ul>
             </div>
         </div>
     );

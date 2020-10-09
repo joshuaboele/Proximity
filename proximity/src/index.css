@@ -40,3 +40,11 @@ body {
 li::marker {
     display: none;
 }
+
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
