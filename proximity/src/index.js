@@ -6,33 +6,32 @@ import "./index.css";
 
 var quizData = [
     {
-        question: "Pizza or pasta?",
-        option_a: "pasta",
-        option_b: "pizza",
+        question: "Chinees of Japans?",
+        option_a: "chinese",
+        option_b: "japanese",
     },
     {
-        question: "Soup or Curry?",
-        option_a: "soup",
-        option_b: "curry",
+        question: "Mexicaans of Spaans?",
+        option_a: "mexican",
+        option_b: "spanish",
     },
     {
-        question: "Vraag 3?",
-        option_a: "soup",
-        option_b: "curry",
+        question: "Frans of Engels?",
+        option_a: "french",
+        option_b: "english",
     },
 ];
 
-const Questions = ({ index, setIndex, answer, setAnswer }) => {
-    const endOfArray = quizData.length;
-    console.log(index);
-    console.log(endOfArray);
+const Questions = ({ setIsDone, answer, setAnswer }) => {
+    const [index, setIndex] = useState(0);
+    const endOfArray = quizData.length - 1;
 
     const handleAnswer = (option) => {
         setAnswer([...answer, option]);
         if (index !== endOfArray) {
             setIndex(index + 1);
         } else {
-            console.log("End of quiz");
+            setIsDone(true);
         }
     };
 
@@ -50,23 +49,31 @@ const Questions = ({ index, setIndex, answer, setAnswer }) => {
 };
 
 const App = () => {
+
     const [restaurants, setRestaurants] = useState([]);
     const [answer, setAnswer] = useState([]);
-    const [index, setIndex] = useState(0);
-    const isFinished = index === quizData.length;
+    const [isFinished, setIsFinished] = useState(false)
+    const url = "http://localhost:4000/?location=rotterdam&categories=";
+    const limit = "&limit=5";
 
     useEffect(() => {
-        fetch("http://localhost:4000/?term=sushi,pizza&location=kyoto&limit=5")
-            .then((response) => response.json())
-            .then((data) => {
-                setRestaurants(data);
-            });
-    }, []);
+        if(isFinished === true) { 
+
+            let categories = answer.join(",");
+            let parsedUrl = url + categories + limit;
+            fetch(parsedUrl)
+                .then((response) => response.json())
+                .then((data) => {
+                    setRestaurants(data);
+                });       
+            }  
+        }, [isFinished]) 
+       
 
     return (
         <div>
             <div className="wrapper">
-                {!isFinished && <Questions index={index} setIndex={setIndex} answer={answer} setAnswer={setAnswer} />}
+                {!isFinished && <Questions setIsDone={setIsFinished} answer={answer} setAnswer={setAnswer} />}
                 <ul className="list">
                     <RestaurantResults className="" restaurants={restaurants} />
                 </ul>
