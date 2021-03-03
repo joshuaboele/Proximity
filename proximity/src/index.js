@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom";
 import RestaurantResults from "./components/restaurantResults";
 import Title from "./components/title";
-import Logo from "./components/logo";
 import "./index.css";
 
 var quizData = [
     {
         question: "Chinees of Japans?",
-        option_a: "chinees",
-        option_b: "japans",
+        option_a: "chinese",
+        option_b: "japanese",
     },
     {
         question: "Mexicaans of Spaans?",
@@ -41,10 +40,10 @@ const Questions = ({ setIsDone, answer, setAnswer }) => {
     let option_B = quizData[index].option_b;
 
     return (
-        <div className="questions">
-            <Logo/>
-            <Title title={"Smulpaap."} />
-            <p>Eet je liever <button className="answer" onClick={() => handleAnswer(option_A)}>{option_A}</button> of <button className="answer" onClick={() => handleAnswer(option_B)}>{option_B}</button></p>
+        <div>
+            <Title title={question} />
+            <button onClick={() => handleAnswer(option_A)}>{option_A}</button>
+            <button onClick={() => handleAnswer(option_B)}>{option_B}</button>
         </div>
     );
 };
@@ -55,7 +54,7 @@ const App = () => {
     const [answer, setAnswer] = useState([]);
     const [isFinished, setIsFinished] = useState(false)
     const url = "http://localhost:4000/?location=rotterdam&categories=";
-    const limit = "&limit=9";
+    const limit = "&limit=5";
 
     useEffect(() => {
         if(isFinished === true) { 

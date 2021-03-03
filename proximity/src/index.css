@@ -1,67 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;700;900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap");
 
-:root {
-    --yellow: #FFF1BF;
-    --red: #EE5C5C;
-}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
 
 .wrapper {
     margin: 50px auto 0;
-    width: 80%;
-
-}
-
-.questions {
+    width: 400px;
+    background: white;
     border-radius: 10px;
-    font-size: 100px;
-    text-align: center;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .list {
     padding: 20px;
     list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-
-}
-
-.logo {
-    width: inherit;
-}
-
-.list__item {
-    flex-basis: 33.33%;
 }
 
 h1 {
+    font-family: "Merriweather", sans-serif;
     text-align: center;
-    margin-top: 5px;
 }
 
 body {
-    background: var(--yellow);
-    font-family: 'Raleway', sans-serif;
-    font-weight: 900;
-    color: var(--red);
-
+    background: white;
 }
 
 img {
     height: 200px;
     width: 100%;
     object-fit: cover;
-}
-
-.answer {
-    font-family: 'Raleway', sans-serif;
-    background: var(--yellow);
-    color: var(--red);
-    border: 0;
-    display: inline;
-    cursor: pointer;
-    font-size: 100px;
-    text-decoration: underline;
-    font-weight: 900;
 }
 
 ul,
