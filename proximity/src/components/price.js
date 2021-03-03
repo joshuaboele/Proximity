@@ -1,7 +1,7 @@
 import React from "react";
 
 const Price = ({ price }) => {
-    return <p>Price: {price}</p>;
+    return <p>{price}</p>;
 };
 
 export default Price;
